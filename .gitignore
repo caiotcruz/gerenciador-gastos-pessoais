@@ -1,0 +1,9 @@
+# Arquivos gerados pelo Maven
+/target/
+
+# Arquivos de log
+*.log
+*.log.*
+
+# Arquivos de configuração da IDE
+.vscode/
