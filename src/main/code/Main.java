@@ -1,6 +1,8 @@
 import model.Lancamento;
 import repository.LancamentoRepository;
 
+import util.Validador;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,22 +25,36 @@ public class Main {
 
             switch (opcao) {
                 case 1 -> {
-                    System.out.print("Data (DD/MM/AAAA): ");
-                    String data = scanner.nextLine();
+                    String data;
+                    while (true){
+                        System.out.println("Data (DD/MM/AAAA)");
+                        data = scanner.nextLine();
+                        if (Validador.validarData(data)){
+                            break;
+                        }
+                        System.out.println("Data inválida! Tente novamente.");
+                    }
 
                     System.out.print("Descrição (opcional): ");
                     String descricao = scanner.nextLine();
 
                     System.out.print("Categoria: ");
                     String categoria = scanner.nextLine();
-
-                    System.out.print("Valor (XX,XX): ");
-                    double valor = scanner.nextDouble();
-                    scanner.nextLine();
+                    
+                    double valor;
+                    while (true){
+                        try {
+                            System.out.print("Valor: ");
+                            valor = Validador.validarValor(scanner.nextLine());
+                            break;
+                        } catch (NumberFormatException e) {
+                            System.out.println("Valor inválido! Tente novamente.");
+                        }
+                    }
 
                     Lancamento l = new Lancamento(data, descricao, categoria, valor);
                     repo.adicionar(l);
-                    System.out.println("✅ Lançamento adicionado!");
+                    System.out.println("Lançamento adicionado!");
                 }
                 case 2 -> {
                     List<Lancamento> lancamentos = repo.listar();
@@ -58,12 +74,20 @@ public class Main {
                             .orElse(null);
 
                     if (alvo == null) {
-                        System.out.println("❌ ID não encontrado!");
+                        System.out.println("ID não encontrado!");
                         break;
                     }
 
-                    System.out.print("Nova data (DD/MM/AAAA): ");
-                    alvo.setData(scanner.nextLine());
+                    String data;
+                    while (true){
+                        System.out.println("Data (DD/MM/AAAA)");
+                        data = scanner.nextLine();
+                        if (Validador.validarData(data)){
+                            alvo.setData(data);
+                            break;
+                        }
+                        System.out.println("Data inválida! Tente novamente.");
+                    }
 
                     System.out.print("Nova descrição: ");
                     alvo.setDescricao(scanner.nextLine());
@@ -71,18 +95,25 @@ public class Main {
                     System.out.print("Nova categoria: ");
                     alvo.setCategoria(scanner.nextLine());
 
-                    System.out.print("Novo valor: ");
-                    alvo.setValor(scanner.nextDouble());
-                    scanner.nextLine();
+                    double valor;
+                    while (true){
+                        try {
+                            System.out.print("Valor: ");
+                            alvo.setValor(Validador.validarValor(scanner.nextLine()));
+                            break;
+                        } catch (NumberFormatException e) {
+                            System.out.println("Valor inválido! Tente novamente.");
+                        }
+                    }
 
                     repo.atualizar(alvo);
-                    System.out.println("✅ Lançamento atualizado!");
+                    System.out.println("Lançamento atualizado!");
                 }
                 case 4 -> {
                     System.out.print("Digite o ID do lançamento a remover: ");
                     String id = scanner.nextLine();
                     repo.remover(id);
-                    System.out.println("✅ Lançamento removido (se existia)!");
+                    System.out.println("Lançamento removido (se existia)!");
                 }
                 case 5 -> {
                     System.out.println("Encerrando...");
