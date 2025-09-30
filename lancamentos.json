@@ -1,0 +1,30 @@
+[
+  {
+    "id": "2ef8386c-d7d0-4941-b910-8809188aae3c",
+    "data": "26/09/2025",
+    "descricao": "Pedimos Hamburger hoje",
+    "categoria": "Comida",
+    "valor": 100.0
+  },
+  {
+    "id": "b972fcbf-41fc-41bd-aee3-a0bf3ed990a9",
+    "data": "13/09/2001",
+    "descricao": "teste",
+    "categoria": "teste",
+    "valor": 20.0
+  },
+  {
+    "id": "061e24a8-9c90-4219-961a-6b69c5bfd399",
+    "data": "26/09/2025",
+    "descricao": "Pedi ifood",
+    "categoria": "Ifood",
+    "valor": 200.0
+  },
+  {
+    "id": "0519c9a9-04d6-47f8-95c5-ca6c9e7be457",
+    "data": "28/09/2025",
+    "descricao": "Pedimos pizza",
+    "categoria": "Comida",
+    "valor": 100.0
+  }
+]
